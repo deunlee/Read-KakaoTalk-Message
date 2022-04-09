@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Read KakaoTalk</string>
+
+    <string name="accessibility_description">카카오톡 화면을 읽으려면 접근성 권한이 필요합니다.</string>
+</resources>
