@@ -25,6 +25,12 @@ public class MyAccessibilityService extends AccessibilityService {
         final String packageName = event.getPackageName().toString();
         if (!Objects.equals(packageName, TARGET_APP_PACKAGE)) return;
 
+        // 로그
+//        Log.v(TAG, String.format(
+//                "EVENT :: type=%s, class=%s, package=%s, time=%s, text=%s, source=%s",
+//                event.getEventType(), event.getClassName(), event.getPackageName(),
+//                event.getEventTime(), event.getText(), event.getSource()));
+
         // 정보 가져오기
         if (event.getClassName() == null || event.getSource() == null) return;
         int    type      = event.getEventType();
@@ -116,6 +122,9 @@ public class MyAccessibilityService extends AccessibilityService {
                         isChildImageView(node, 1)) {
                     name = (isSelfMessage(node.getChild(0)) ? "나" : name);
                     text = "(사진)";
+//                  final Rect rect = new Rect();
+//                  node.getChild(0).getBoundsInScreen(rect);
+//                  Log.i(TAG, "POS: " + rect.toString());
                 }
                 // 이모티콘 노드 (상대방 이름 없음)
                 else if ((childCount == 1 || childCount == 2) && // 일반=1, 반응=2
@@ -128,7 +137,11 @@ public class MyAccessibilityService extends AccessibilityService {
                 else {
                     name = null;
                     text = getAllText(node, 0);
+                    // Log.e(TAG,"CHILD " + i + " // " + "unknown // childCnt="+ node.getChildCount() + ", text=" + text);
+                    // printAllViews(node, 0);
                 }
+
+//                Log.v(TAG,"CHILD " + i + " // " + name + ": " + text);
 
 //                message.append(text).append(" "); // 대화 내용만
                 message.append(name).append(": ").append(text).append("\n"); // 이름 + 대화 내용
